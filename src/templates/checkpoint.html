@@ -1,34 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+<center>
 <title>{{ title }}</title>
 <h2>{{ head }}</h2>
 
-    <form action="{{ cp }}" method="POST">{% csrf_token %}
+    <div>
+        <form action="{{ cp }}" method="POST">{% csrf_token %}
 
-        {% if form.non_field_errors %}
-            <div>{{ form.non_field_errors|striptags }}</div>
-        {% endif %}
+            {% if form.non_field_errors %}
+                <div class="alert alert-dismissible alert-danger">{{ form.non_field_errors|striptags }}</div>
+            {% endif %}
+
+            <div class="alert alert-dismissible alert-danger">
+                {% if
+                {{ form.mpr_id.errors|striptags }}
+            </div>
+
+                <p>{{ form.mpr_id }}</p>
 
 
-        <div>
-            {{ form.mpr_id.errors|striptags }}
-            <p>{{ form.mpr_id }}</p>
-        </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-dismissible alert-success">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
 
-        {% if messages %}
-            {% for message in messages %}
-                <div>
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-
-        <input type="hidden" id="id_place_name_id" name="place_name_id" value="{{ cpid }}">
-        <p>
-            <input type="submit" value="CHECK IN">
-        </p>
-    </form>
-
+            <input type="hidden" id="id_place_name_id" name="place_name_id" value="{{ cpid }}">
+            <p>
+                <input class="btn btn-success" type="submit" value="CHECK IN">
+            </p>
+        </form>
+    </div>
+</center>
 {% endblock %}
