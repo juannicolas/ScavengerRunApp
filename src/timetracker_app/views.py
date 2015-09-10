@@ -19,11 +19,11 @@ def cp(request, cpid, template_name):
 
     if request.method == "POST":
         form = AddTimeForm(request.POST)
-        print request.POST
 
     context = {
         "title": title,
         "head": head,
-        "form": form
+        "form": form,
+        "cpid": cpid
     }
     return render(request, template_name, context)

@@ -16,8 +16,7 @@ class Player(models.Model):
 
 
 class CheckPoint(models.Model):
-    id = models.IntegerField(verbose_name="ID", unique=True, editable=False, primary_key=True)
-    place_name = models.CharField(verbose_name="Nombre Lugar", max_length=60, editable=True, default=True, unique=True)
+    place_name = models.CharField(verbose_name="Nombre Lugar", max_length=60, unique=True)
 
     class Meta:
         verbose_name = "CheckPoint"
@@ -28,7 +27,7 @@ class CheckPoint(models.Model):
 
 
 class RecordTime(models.Model):
-    mpr_id = models.CharField(verbose_name="MPRID", max_length=6, editable=True)
+    mpr_id = models.ForeignKey(Player)
     place_name_id = models.CharField(verbose_name="Check Point ID", max_length=1)
     check_in_time = models.TimeField(verbose_name="CheckIn Time", auto_now=True)
 
