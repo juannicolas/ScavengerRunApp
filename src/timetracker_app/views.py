@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render
 
 from .forms import AddTimeForm
@@ -19,6 +20,14 @@ def cp(request, cpid, template_name):
 
     if request.method == "POST":
         form = AddTimeForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'Record guardado exitosamente.')
+
+            form = AddTimeForm()
+    else:
+        pass
 
     context = {
         "title": title,

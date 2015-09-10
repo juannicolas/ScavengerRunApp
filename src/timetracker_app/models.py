@@ -34,7 +34,8 @@ class RecordTime(models.Model):
     class Meta:
         verbose_name = "Tiempo"
         verbose_name_plural = "Tiempos"
+        unique_together = ('mpr_id', 'place_name_id')
 
     def __unicode__(self):
-        return self.mpr_id
+        return unicode(self.mpr_id)
 
