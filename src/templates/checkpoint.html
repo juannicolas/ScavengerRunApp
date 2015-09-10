@@ -1,9 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <title>{{ title }}</title>
-    <h2>{{ head }}</h2>
-    <div>
-        {{ form.mpr_id }}
-    </div>
+
+<title>{{ title }}</title>
+<h2>{{ head }}</h2>
+
+    <form action="{{ cp }}" method="POST">{% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div>{{ form.non_field_errors|striptags }}</div>
+        {% endif %}
+
+
+        <div>
+            {{ form.mpr_id.errors|striptags }}
+            <p>{{ form.mpr_id }}</p>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <input type="hidden" id="id_place_name_id" name="place_name_id" value="{{ cpid }}">
+        <p>
+            <input type="submit" value="CHECK IN">
+        </p>
+    </form>
+
 {% endblock %}
