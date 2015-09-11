@@ -1,7 +1,6 @@
 from django.contrib import messages
 from .models import Player, RecordTime, CheckPoint
 from django.shortcuts import render
-import time
 
 from .forms import AddTimeForm
 
@@ -11,7 +10,7 @@ def welcome(request):
     cps = CheckPoint.objects.all()
     context = {
         "title": title,
-        "cps" : cps
+        "cps": cps
     }
     return render(request, "welcome.html", context)
 
@@ -53,7 +52,7 @@ def reports(request, template_name):
 
 
 def playertimedetails(request, mprid, template_name):
-    detail_records = RecordTime.objects.filter(mprid= mprid).order_by('check_in_time')
+    detail_records = RecordTime.objects.filter(mprid=mprid).order_by('check_in_time')
 
     time1 = None
     i = 0
@@ -61,14 +60,18 @@ def playertimedetails(request, mprid, template_name):
     for dr in detail_records:
         if i == 0:
             time1 = dr.check_in_time
-            details_table.append({'diff':None,'check_in_time':dr.check_in_time,'place_name':dr.place_name})
+            details_table.append({'diff': None,
+                                  'check_in_time': dr.check_in_time,
+                                  'place_name': dr.place_name})
             i += 1
         else :
-            details_table.append({'diff':dr.check_in_time - time1,'check_in_time':dr.check_in_time,'place_name':dr.place_name})
+            details_table.append({'diff': dr.check_in_time - time1,
+                                  'check_in_time': dr.check_in_time,
+                                  'place_name': dr.place_name})
             time1 = dr.check_in_time
             i += 1
     context = {
         "details": details_table,
-        "mprid" : mprid
+        "mprid": mprid
     }
     return render(request, template_name, context)
