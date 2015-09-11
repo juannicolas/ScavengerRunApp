@@ -1,13 +1,20 @@
 {% extends "base.html" %}
-
+{% block style %}
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+    <style>
+        .ui-btn{
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    </style>
+{% endblock %}
 {% block content %}
 <center>
-<title>{{ title }}</title>
-    <div class="jumbotron">
-        <h2>{{ head }}</h2>
-    </div>
+    <h2>{{ head }}</h2>
+
     <div>
-        <form action="{{ cp }}" method="POST">{% csrf_token %}
+        <form action="{% url 'cp' cpid ts %}" method="POST">{% csrf_token %}
             <p>Escribir los 3 digitos de ID del jugador en el encasillado abajo</p>
             <br>
             {% if messages %}
@@ -19,14 +26,37 @@
             {% endif %}
             <div class="form-group">
                 MPR ID:<p>{{ form.mpr_id }}</p>
-                {% if form.non_field_errors %}
-                    <div class="alert alert-dismissible alert-danger">{{ form.non_field_errors|striptags }}</div>
-                {% endif %}
             </div>
-
+            {% if form.non_field_errors %}
+                <div class="alert alert-dismissible alert-danger">{{ form.non_field_errors|striptags }}</div>
+            {% endif %}
             {% if form.mpr_id.errors %}
                 <div class="alert alert-danger">{{ form.mpr_id.errors|striptags }}</div>
             {% endif %}
+            <div>
+                <table class="ui-bar-a" id="n_keypad" style="-khtml-user-select: none;">
+                    <tr>
+                       <td><a data-role="button" data-theme="b" class="numero">7</a></td>
+                       <td><a data-role="button" data-theme="b" class="numero">8</a></td>
+                       <td><a data-role="button" data-theme="b" class="numero">9</a></td>
+
+                    </tr>
+                    <tr>
+                       <td><a data-role="button" data-theme="b" class="numero">4</a></td>
+                       <td><a data-role="button" data-theme="b" class="numero">5</a></td>
+                       <td><a data-role="button" data-theme="b" class="numero">6</a></td>
+                    </tr>
+                    <tr>
+                       <td><a data-role="button" data-theme="b" class="numero">1</a></td>
+                       <td><a data-role="button" data-theme="b" class="numero">2</a></td>
+                       <td><a data-role="button" data-theme="b" class="numero">3</a></td>
+                    </tr>
+                    <tr>
+                       <td><a data-role="button" data-theme="e" class="del"><span class="glyphicon glyphicon-arrow-left"></span> </a></td>
+                       <td colspan="2"><a data-role="button" data-theme="b" class="zero">0</a></td>
+                    </tr>
+                    </table>
+            </div>
             <input type="hidden" id="id_place_name_id" name="place_name_id" value="{{ cpid }}">
             <p>
                 <input class="btn btn-success" type="submit" value="CHECK IN">
@@ -34,4 +64,49 @@
         </form>
     </div>
 </center>
+{% endblock %}
+{% block js %}
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+<script>
+    //$(document).on("ready",setHandlers());
+    //$(document).on("change",setHandlers());
+    window.onload = setHandlers();
+    function setHandlers(){
+      $('.done').click(function(){
+          //$('#n_keypad').hide('fast');
+          $('#id_mpr_id').val("");
+      });
+      $('.numero').click(function(){
+        if (!isNaN($('#id_mpr_id').val()) && $('#id_mpr_id').val().length < parseInt($('#id_mpr_id').attr('maxlength'))) {
+          $('#id_mpr_id').val($('#id_mpr_id').val() + $(this).text());
+        }
+      });
+      $('.neg').click(function(){
+          if (!isNaN($('#id_mpr_id').val()) && $('#id_mpr_id').val().length > 0) {
+            if (parseInt($('#id_mpr_id').val()) > 0) {
+              $('#id_mpr_id').val(parseInt($('#id_mpr_id').val()) - 1);
+            }
+          }
+      });
+      $('.pos').click(function(){
+          if (!isNaN($('#id_mpr_id').val()) && $('#id_mpr_id').val().length > 0) {
+            $('#id_mpr_id').val(parseInt($('#id_mpr_id').val()) + 1);
+          }
+      });
+      $('.del').click(function(){
+          $('#id_mpr_id').val($('#id_mpr_id').val().substring(0,$('#id_mpr_id').val().length - 1));
+      });
+      $('.clear').click(function(){
+          $('#id_mpr_id').val('');
+      });
+      $('.zero').click(function(){
+        if (!isNaN($('#id_mpr_id').val()) && $('#id_mpr_id').val().length < parseInt($('#id_mpr_id').attr('maxlength'))) {
+            $('#id_mpr_id').val($('#id_mpr_id').val() + $(this).text());
+        }
+      });
+     };
+
+
+</script>
 {% endblock %}
