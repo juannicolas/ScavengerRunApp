@@ -36,3 +36,7 @@ def cp(request, cpid, template_name):
         "cpid": cpid
     }
     return render(request, template_name, context)
+
+
+def reports(request, template_name):
+    return render(request, template_name, {})
