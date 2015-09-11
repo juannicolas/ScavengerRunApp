@@ -11,10 +11,9 @@
     <p class="text-info">Bienvenido a la herramienta oficial del evento del año, Scavenger Run 2015.</p>
     <br>
     <div>
-        <p><a class="btn btn-primary" type="button" href="cp/1/213">Checkpoint 1</a></p>
-        <p><a class="btn btn-primary" type="button" href="cp/2/122">Checkpoint 2</a></p>
-        <p><a class="btn btn-primary" type="button" href="cp/3/123">Checkpoint 3</a></p>
-        <p><a class="btn btn-primary" type="button" href="cp/4/133">Checkpoint 4</a></p>
+        {% for cp in cps %}
+        <p><a class="btn btn-primary" type="button" href="{% url 'cp' cp.pk %}">Checkpoint {{ cp.pk }}</a></p>
+        {% endfor %}
     </div>
 </center>
 {% endblock %}

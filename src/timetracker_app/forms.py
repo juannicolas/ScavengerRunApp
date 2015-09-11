@@ -12,9 +12,6 @@ class AddTimeForm(forms.ModelForm):
         widgets = {
             'mprid': forms.TextInput(attrs={'maxlength': '3',
                                             'class': 'form-control'}),
-            'mpr_id': forms.TextInput(attrs={'maxlength': '3',
-                                             'class': 'form-control',
-                                             'readonly': 'readonly'}),
         }
         error_messages = {
             NON_FIELD_ERRORS: {

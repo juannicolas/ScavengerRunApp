@@ -14,7 +14,7 @@
     <h2>{{ head }}</h2>
 
     <div>
-        <form action="{% url 'cp' cpid ts %}" method="POST">{% csrf_token %}
+        <form action="{% url 'cp' cpid %}" method="POST">{% csrf_token %}
             <p>Escribir los 3 digitos de ID del jugador en el encasillado abajo</p>
             <br>
             {% if messages %}
@@ -34,7 +34,7 @@
                 <div class="alert alert-danger">{{ form.mprid.errors|striptags }}</div>
             {% endif %}
             <div>
-                <table class="ui-bar-a" id="n_keypad" style="-khtml-user-select: none;">
+                <table class="ui-bar-a" id="n_keypad" style="display: none; -khtml-user-select: none;">
                     <tr>
                        <td><a data-role="button" data-theme="b" class="numero">7</a></td>
                        <td><a data-role="button" data-theme="b" class="numero">8</a></td>
@@ -69,43 +69,40 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 <script>
-    //$(document).on("ready",setHandlers());
-    //$(document).on("change",setHandlers());
-    window.onload = setHandlers();
-    function setHandlers(){
+    $(document).ready(function(){
       $('.done').click(function(){
           //$('#n_keypad').hide('fast');
-          $('#id_mpr_id').val("");
+          $('#id_mprid').val("");
       });
       $('.numero').click(function(){
-        if (!isNaN($('#id_mpr_id').val()) && $('#id_mpr_id').val().length < parseInt($('#id_mpr_id').attr('maxlength'))) {
-          $('#id_mpr_id').val($('#id_mpr_id').val() + $(this).text());
+        if (!isNaN($('#id_mprid').val()) && $('#id_mprid').val().length < parseInt($('#id_mprid').attr('maxlength'))) {
+          $('#id_mprid').val($('#id_mprid').val() + $(this).text());
         }
       });
       $('.neg').click(function(){
-          if (!isNaN($('#id_mpr_id').val()) && $('#id_mpr_id').val().length > 0) {
-            if (parseInt($('#id_mpr_id').val()) > 0) {
-              $('#id_mpr_id').val(parseInt($('#id_mpr_id').val()) - 1);
+          if (!isNaN($('#id_mprid').val()) && $('#id_mprid').val().length > 0) {
+            if (parseInt($('#id_mprid').val()) > 0) {
+              $('#id_mprid').val(parseInt($('#id_mprid').val()) - 1);
             }
           }
       });
       $('.pos').click(function(){
-          if (!isNaN($('#id_mpr_id').val()) && $('#id_mpr_id').val().length > 0) {
-            $('#id_mpr_id').val(parseInt($('#id_mpr_id').val()) + 1);
+          if (!isNaN($('#id_mprid').val()) && $('#id_mprid').val().length > 0) {
+            $('#id_mprid').val(parseInt($('#id_mprid').val()) + 1);
           }
       });
       $('.del').click(function(){
-          $('#id_mpr_id').val($('#id_mpr_id').val().substring(0,$('#id_mpr_id').val().length - 1));
+          $('#id_mprid').val($('#id_mprid').val().substring(0,$('#id_mprid').val().length - 1));
       });
       $('.clear').click(function(){
-          $('#id_mpr_id').val('');
+          $('#id_mprid').val('');
       });
       $('.zero').click(function(){
-        if (!isNaN($('#id_mpr_id').val()) && $('#id_mpr_id').val().length < parseInt($('#id_mpr_id').attr('maxlength'))) {
-            $('#id_mpr_id').val($('#id_mpr_id').val() + $(this).text());
+        if (!isNaN($('#id_mprid').val()) && $('#id_mprid').val().length < parseInt($('#id_mprid').attr('maxlength'))) {
+            $('#id_mprid').val($('#id_mprid').val() + $(this).text());
         }
       });
-     };
+     });
 
 
 </script>
