@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render
 
 from .forms import AddTimeForm
+from .models import Player, RecordTime
 
 
 def welcome(request):
@@ -39,6 +40,8 @@ def cp(request, cpid, template_name):
 
 
 def reports(request, template_name):
+    players = Player.objects.all()
+    print players
     return render(request, template_name, {})
 
 
