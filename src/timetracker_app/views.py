@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render
+import time
 
 from .forms import AddTimeForm
 
@@ -12,7 +13,7 @@ def welcome(request):
     return render(request, "welcome.html", context)
 
 
-def cp(request, cpid, template_name):
+def cp(request, cpid, ts, template_name):
     title = "ScavengerRunApp - CP%s" % cpid
     head = "Check Point %s" % cpid
 
@@ -33,7 +34,8 @@ def cp(request, cpid, template_name):
         "title": title,
         "head": head,
         "form": form,
-        "cpid": cpid
+        "cpid": cpid,
+        "ts" : int(time.time() * 1000)
     }
     return render(request, template_name, context)
 
