@@ -12,7 +12,7 @@
     <br>
     <div>
         {% for cp in cps %}
-        <p><a class="btn btn-primary" type="button" href="{% url 'cp' cp.pk %}">Checkpoint {{ cp.pk }}</a></p>
+        <p><a class="btn btn-primary" type="button" href="{% url 'cp' cp.pk %}">{{ cp.place_name }}</a></p>
         {% endfor %}
     </div>
 </center>
