@@ -1,4 +1,5 @@
 from django.contrib import messages
+from .models import Player, RecordTime
 from django.shortcuts import render
 import time
 
@@ -41,8 +42,20 @@ def cp(request, cpid, ts, template_name):
 
 
 def reports(request, template_name):
-    return render(request, template_name, {})
+    player = Player.objects.all()
+    print player
+
+    context = {
+        "player": player
+    }
+    return render(request, template_name, context)
 
 
-def details(request, template_name):
-    return render(request, template_name, {})
+def playertimedetails(request, template_name):
+    detail_records = RecordTime.objects.values().order_by('mprid')
+    print detail_records
+
+    context = {
+        "details": detail_records
+    }
+    return render(request, template_name, context)

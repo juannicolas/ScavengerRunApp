@@ -7,9 +7,11 @@ from .models import RecordTime
 class AddTimeForm(forms.ModelForm):
     class Meta:
         model = RecordTime
-        fields = ['mpr_id', 'place_name_id']
+        fields = ['mprid', 'place_name_id']
 
         widgets = {
+            'mprid': forms.TextInput(attrs={'maxlength': '3',
+                                            'class': 'form-control'}),
             'mpr_id': forms.TextInput(attrs={'maxlength': '3',
                                              'class': 'form-control',
                                              'readonly': 'readonly'}),
@@ -18,7 +20,7 @@ class AddTimeForm(forms.ModelForm):
             NON_FIELD_ERRORS: {
                 'unique_together': "Ya existe un record en este Checkpoint para este ID"
             },
-            'mpr_id': {
+            'mprid': {
                 'invalid_choice': "Ese ID no existe en record, favor de verificar y volver a intentar."
             }
         }
