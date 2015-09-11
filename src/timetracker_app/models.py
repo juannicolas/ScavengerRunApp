@@ -2,10 +2,10 @@ from django.db import models
 
 
 class Player(models.Model):
-    id_player = models.CharField(verbose_name="MPR ID", max_length=3, primary_key=True, editable=True)
-    full_name = models.CharField(verbose_name="Nombre Completo", max_length=200, editable=True)
-    phone = models.CharField(verbose_name="Telefono", unique=True, max_length=10, editable=True)
-    email = models.EmailField(verbose_name="Email", editable=True)
+    mpr_id = models.CharField(verbose_name="MPR ID", max_length=3, unique=True)
+    full_name = models.CharField(verbose_name="Nombre Completo", max_length=200)
+    phone = models.CharField(verbose_name="Telefono", max_length=10)
+    email = models.EmailField(verbose_name="Email")
 
     class Meta:
         verbose_name = "Jugador"
@@ -34,7 +34,6 @@ class RecordTime(models.Model):
     class Meta:
         verbose_name = "Tiempo"
         verbose_name_plural = "Tiempos"
-        unique_together = ('mpr_id', 'place_name_id')
 
     def __unicode__(self):
         return unicode(self.mpr_id)

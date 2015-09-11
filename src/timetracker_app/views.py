@@ -1,4 +1,5 @@
 from django.contrib import messages
+from .models import Player, RecordTime
 from django.shortcuts import render
 
 from .forms import AddTimeForm
@@ -39,8 +40,21 @@ def cp(request, cpid, template_name):
 
 
 def reports(request, template_name):
-    return render(request, template_name, {})
+    players = {}
+    player = Player.objects.all()
+    players['objects'] = mpr_id(range(1, objects.count()+1), objects)
+    print player
+    context = {
+        "player": player
+    }
+    return render(request, template_name, context)
 
 
-def details(request, template_name):
-    return render(request, template_name, {})
+def timedetails(request, template_name):
+    detail_records = RecordTime.objects.values().order_by('mpr_id')
+    print detail_records
+
+    context = {
+        "details": detail_records
+    }
+    return render(request, template_name, context)
