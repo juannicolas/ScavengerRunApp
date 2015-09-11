@@ -3,8 +3,7 @@
 {% block content %}
 
 <h1>Tabla de tiempos</h1>
-<h4>Detalles de tiempo del jugador {{ mprid }}</h4>
-
+<h4>Detalles de tiempo del jugador <span class="label label-info">{{ mprid }}</span></h4>
 <div>
     <table class="table table-striped table-hover ">
     <thead>
@@ -28,7 +27,7 @@
 <br>
 <div>
     <p>
-        <a href="{{ reports }}" class="btn btn-link">Volver atrás</a>
+        <a href="/reports" class="btn btn-link">Volver atrás</a>
     </p>
 </div>
 
