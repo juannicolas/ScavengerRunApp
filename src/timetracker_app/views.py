@@ -43,11 +43,10 @@ def cp(request, cpid, template_name):
 
 
 def reports(request, template_name):
-    player = Player.objects.all()
-    print player
+    players = Player.objects.all()
 
     context = {
-        "player": player
+        "players": players
     }
     return render(request, template_name, context)
 
