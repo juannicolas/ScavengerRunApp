@@ -18,14 +18,14 @@
                 {% endfor %}
             {% endif %}
             <div class="form-group">
-                MPR ID:<p>{{ form.mpr_id }}</p>
+                MPR ID:<p>{{ form.mprid }}</p>
                 {% if form.non_field_errors %}
                     <div class="alert alert-dismissible alert-danger">{{ form.non_field_errors|striptags }}</div>
                 {% endif %}
             </div>
 
-            {% if form.mpr_id.errors %}
-                <div class="alert alert-danger">{{ form.mpr_id.errors|striptags }}</div>
+            {% if form.mprid.errors %}
+                <div class="alert alert-danger">{{ form.mprid.errors|striptags }}</div>
             {% endif %}
             <input type="hidden" id="id_place_name_id" name="place_name_id" value="{{ cpid }}">
             <p>

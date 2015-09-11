@@ -40,10 +40,9 @@ def cp(request, cpid, template_name):
 
 
 def reports(request, template_name):
-    players = {}
     player = Player.objects.all()
-    players['objects'] = mpr_id(range(1, objects.count()+1), objects)
     print player
+
     context = {
         "player": player
     }
@@ -51,7 +50,7 @@ def reports(request, template_name):
 
 
 def timedetails(request, template_name):
-    detail_records = RecordTime.objects.values().order_by('mpr_id')
+    detail_records = RecordTime.objects.values().order_by('mprid')
     print detail_records
 
     context = {
