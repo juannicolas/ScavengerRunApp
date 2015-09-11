@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Tabla de tiempos</h1>
+<h4>Detalles de tiempo del jugador {{ mpr_id }}</h4>
+
+<div>
+    <table class="table table-striped table-hover ">
+    <thead>
+        <tr>
+            <th>Check Point</th>
+            <th>Horas</th>
+        </tr>
+    </thead>
+        <tbody>
+        <tr>
+            <td>Check Point ID/Nombre</td>
+            <td>Tiempo de Check In</td>
+        </tr>
+        <tr>
+            <td>Check Point ID/Nombre</td>
+            <td>Tiempo de Check In</td>
+        </tr>
+        <tr>
+            <td>Check Point ID/Nombre</td>
+            <td>Tiempo de Check In</td>
+        </tr>
+        <tr>
+            <td>Check Point ID/Nombre</td>
+            <td>Tiempo de Check In</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <p>
+        <a href="{{ reports }}" class="btn btn-link">Volver atrás</a>
+    </p>
+</div>
+{% endblock %}

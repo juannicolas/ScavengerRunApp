@@ -40,3 +40,7 @@ def cp(request, cpid, template_name):
 
 def reports(request, template_name):
     return render(request, template_name, {})
+
+
+def details(request, template_name):
+    return render(request, template_name, {})
