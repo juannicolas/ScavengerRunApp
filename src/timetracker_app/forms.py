@@ -7,7 +7,7 @@ from .models import RecordTime
 class AddTimeForm(forms.ModelForm):
     class Meta:
         model = RecordTime
-        fields = ['mprid', 'place_name_id']
+        fields = ['mprid', 'place_name']
 
         widgets = {
             'mprid': forms.TextInput(attrs={'maxlength': '3',

@@ -52,11 +52,23 @@ def reports(request, template_name):
     return render(request, template_name, context)
 
 
-def playertimedetails(request, template_name):
-    detail_records = RecordTime.objects.values().order_by('mprid')
-    print detail_records
+def playertimedetails(request, mprid, template_name):
+    detail_records = RecordTime.objects.filter(mprid= mprid).order_by('check_in_time')
 
+    time1 = None
+    i = 0
+    details_table= []
+    for dr in detail_records:
+        if i == 0:
+            time1 = dr.check_in_time
+            details_table.append({'diff':None,'check_in_time':dr.check_in_time,'place_name':dr.place_name})
+            i += 1
+        else :
+            details_table.append({'diff':dr.check_in_time - time1,'check_in_time':dr.check_in_time,'place_name':dr.place_name})
+            time1 = dr.check_in_time
+            i += 1
     context = {
-        "details": detail_records
+        "details": details_table,
+        "mprid" : mprid
     }
     return render(request, template_name, context)

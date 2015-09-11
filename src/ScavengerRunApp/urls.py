@@ -21,5 +21,5 @@ urlpatterns = [
     url(r'^$', 'timetracker_app.views.welcome', name='welcome'),
     url(r'cp/(\d+)/$', 'timetracker_app.views.cp', {'template_name': 'checkpoint.html'}, name='cp'),
     url(r'reports/$', 'timetracker_app.views.reports', {'template_name': 'reports.html'}, name='reports'),
-    url(r'details/$', 'timetracker_app.views.playertimedetails', {'template_name': 'details.html'}, name='playertimedetails'),
+    url(r'details/(\d+)/$', 'timetracker_app.views.playertimedetails', {'template_name': 'details.html'}, name='playertimedetails'),
 ]
