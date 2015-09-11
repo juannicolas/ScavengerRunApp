@@ -16,7 +16,8 @@ class Player(models.Model):
 
 
 class CheckPoint(models.Model):
-    place_name = models.CharField(verbose_name="Nombre Lugar", max_length=60, unique=True)
+    id = models.IntegerField(unique=True, primary_key=True)
+    place_name = models.CharField(verbose_name="Nombre Lugar", max_length=60)
 
     class Meta:
         verbose_name = "CheckPoint"
