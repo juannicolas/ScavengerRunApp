@@ -3,7 +3,7 @@
 {% block content %}
 
 <h1>Tabla de tiempos</h1>
-<h4>Detalles de tiempo del jugador {{ mpr_id }}</h4>
+<h4>Detalles de tiempo del jugador {{ mprid }}</h4>
 
 <div>
     <table class="table table-striped table-hover ">
@@ -11,12 +11,17 @@
         <tr>
             <th>Check Point</th>
             <th>Horas</th>
+            <th>Tiempo</th>
         </tr>
     </thead>
         <tbody>
+        {% for d in details %}
         <tr>
-            {{details}}
+            <td>{{ d.check_in_time }}</td>
+            <td>{{ d.place_name }}</td>
+            <td>{{ d.diff }}</td>
         </tr>
+        {% endfor %}
         </tbody>
     </table>
 </div>

@@ -38,9 +38,9 @@ class Migration(migrations.Migration):
             name='RecordTime',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('place_name_id', models.CharField(max_length=1, verbose_name=b'Check Point ID')),
                 ('check_in_time', models.TimeField(auto_now=True, verbose_name=b'CheckIn Time')),
                 ('mprid', models.ForeignKey(to='timetracker_app.Player')),
+                ('place_name', models.ForeignKey(to='timetracker_app.CheckPoint')),
             ],
             options={
                 'verbose_name': 'Tiempo',
@@ -49,6 +49,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterUniqueTogether(
             name='recordtime',
-            unique_together=set([('mprid', 'place_name_id')]),
+            unique_together=set([('mprid', 'place_name')]),
         ),
     ]

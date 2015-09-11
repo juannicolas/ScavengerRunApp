@@ -28,13 +28,13 @@ class CheckPoint(models.Model):
 
 class RecordTime(models.Model):
     mprid = models.ForeignKey(Player)
-    place_name_id = models.CharField(verbose_name="Check Point ID", max_length=1)
-    check_in_time = models.TimeField(verbose_name="CheckIn Time", auto_now=True)
+    place_name = models.ForeignKey(CheckPoint)
+    check_in_time = models.DateTimeField(verbose_name="CheckIn Time", auto_now=True)
 
     class Meta:
         verbose_name = "Tiempo"
         verbose_name_plural = "Tiempos"
-        unique_together = ['mprid', 'place_name_id']
+        unique_together = ['mprid', 'place_name']
 
     def __unicode__(self):
         return unicode(self.mprid)
