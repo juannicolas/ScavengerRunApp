@@ -10,10 +10,14 @@ class AddTimeForm(forms.ModelForm):
         fields = ['mpr_id', 'place_name_id']
 
         widgets = {
-            'mpr_id': forms.TextInput(attrs={'maxlength': '3'}),
+            'mpr_id': forms.TextInput(attrs={'maxlength': '3',
+                                             'class': 'form-control'}),
         }
         error_messages = {
             NON_FIELD_ERRORS: {
                 'unique_together': "Ya existe un record en este Checkpoint para este ID"
+            },
+            'mpr_id': {
+                'invalid_choice': "Ese ID no existe en record, favor de verificar y volver a intentar."
             }
         }

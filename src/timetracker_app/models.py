@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Player(models.Model):
-    id_player = models.CharField(verbose_name="MPR ID", max_length=6, primary_key=True, editable=True)
+    id_player = models.CharField(verbose_name="MPR ID", max_length=3, primary_key=True, editable=True)
     full_name = models.CharField(verbose_name="Nombre Completo", max_length=200, editable=True)
     phone = models.CharField(verbose_name="Telefono", unique=True, max_length=10, editable=True)
     email = models.EmailField(verbose_name="Email", editable=True)
