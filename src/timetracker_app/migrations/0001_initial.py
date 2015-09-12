@@ -13,8 +13,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='CheckPoint',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('place_name', models.CharField(unique=True, max_length=60, verbose_name=b'Nombre Lugar')),
+                ('id', models.IntegerField(unique=True, serialize=False, primary_key=True)),
+                ('place_name', models.CharField(max_length=60, verbose_name=b'Nombre Lugar')),
             ],
             options={
                 'verbose_name': 'CheckPoint',
@@ -38,9 +38,10 @@ class Migration(migrations.Migration):
             name='RecordTime',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('check_in_time', models.TimeField(auto_now=True, verbose_name=b'CheckIn Time')),
-                ('mprid', models.ForeignKey(to='timetracker_app.Player')),
-                ('place_name', models.ForeignKey(to='timetracker_app.CheckPoint')),
+                ('check_in_time', models.DateTimeField(auto_now=True, verbose_name=b'CheckIn Time')),
+                ('duration', models.DurationField(null=True, blank=True)),
+                ('check_point', models.ForeignKey(to='timetracker_app.CheckPoint')),
+                ('player', models.ForeignKey(related_name='record_time', to='timetracker_app.Player')),
             ],
             options={
                 'verbose_name': 'Tiempo',
@@ -49,6 +50,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterUniqueTogether(
             name='recordtime',
-            unique_together=set([('mprid', 'place_name')]),
+            unique_together=set([('player', 'check_point')]),
         ),
     ]
