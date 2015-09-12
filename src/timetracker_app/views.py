@@ -1,8 +1,7 @@
 from django.contrib import messages
 from .models import Player, RecordTime, CheckPoint
 from django.shortcuts import render
-import operator
-from django.db.models import Count, Sum
+from django.db.models import Sum
 
 from .forms import AddTimeForm
 
