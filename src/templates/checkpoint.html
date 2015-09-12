@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <center>
+<center>
     <div class="jumbotron">
         <br><br><br>
         <h2>{{ head }}</h2>
@@ -24,7 +24,7 @@
                 <div class="alert alert-dismissible alert-danger">{{ form.non_field_errors|striptags }}</div>
             {% endif %}
             {% if form.player.errors %}
-                <div class="alert alert-danger">{{ form.palyer.errors|striptags }}</div>
+                <div class="alert alert-danger">{{ form.player.errors|striptags }}</div>
             {% endif %}
 
             <input type="hidden" id="id_check_point" name="check_point" value="{{ cpid }}">
@@ -38,5 +38,5 @@
             <a href="/" class="btn btn-link">Menu principal</a>
         </p>
     </div>
-    </center>
+</center>
 {% endblock %}

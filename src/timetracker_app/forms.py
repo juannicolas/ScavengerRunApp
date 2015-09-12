@@ -11,7 +11,7 @@ class AddTimeForm(forms.ModelForm):
 
         widgets = {
             'player': forms.TextInput(attrs={'maxlength': '3',
-                                            'class': 'form-control'}),
+                                             'class': 'form-control'}),
         }
         error_messages = {
             NON_FIELD_ERRORS: {

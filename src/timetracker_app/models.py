@@ -21,6 +21,7 @@ class Player(models.Model):
         except IndexError:
             return None
 
+
 class CheckPoint(models.Model):
     id = models.IntegerField(unique=True, primary_key=True)
     place_name = models.CharField(verbose_name="Nombre Lugar", max_length=60)
@@ -45,5 +46,5 @@ class RecordTime(models.Model):
         unique_together = ['player', 'check_point']
 
     def __unicode__(self):
-        return unicode('%s-%s' % (self.player.mprid ,self.check_point.place_name ))
+        return unicode('%s-%s' % (self.player.mprid, self.check_point.place_name))
 
