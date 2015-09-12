@@ -8,11 +8,11 @@
         <h1>Scavenger Run Event</h1>
         <h3>Timetracker</h3>
     </div>
-    <p class="text-info">Bienvenido a la herramienta oficial del evento del año, Scavenger Run 2015.</p>
+    <h4>Favor de seleccionar tu check-point asignado:</h4>
     <br>
     <div>
         {% for cp in cps %}
-        <p><a class="btn btn-primary" type="button" href="{% url 'cp' cp.pk %}">Checkpoint {{ cp.pk }}</a></p>
+        <p><a class="btn btn-primary" type="button" href="{% url 'cp' cp.pk %}">{{ cp.place_name }}</a></p>
         {% endfor %}
     </div>
 </center>

@@ -7,14 +7,17 @@
     <thead>
         <tr>
             <th>MPR ID</th>
+            <th>Name </th>
             <th>Tiempo</th>
         </tr>
     </thead>
     <tbody>
-        {% for p in players %}
+        {% for p in player_total_time %}
             <tr>
                 <td><a href="{% url 'playertimedetails' p.mprid %}" >{{ p.mprid }}</a></td>
-                <td>0</td>
+                <td>{{ p.full_name }}</td>
+
+                <td>{{ p.total_time }}</td>
             </tr>
         {% endfor %}
     </tbody>
