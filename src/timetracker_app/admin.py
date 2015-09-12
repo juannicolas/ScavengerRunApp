@@ -15,8 +15,8 @@ class CheckPointAdmin(admin.ModelAdmin):
 
 class RecordTimeAdmin(admin.ModelAdmin):
     form = AddTimeForm
-    list_display = ('mprid', 'check_in_time', 'place_name')
-    list_filter = ['mprid']
+    list_display = ('player', 'check_in_time', 'check_point','duration')
+    list_filter = ['player']
 
 
 admin.site.register(Player, PlayerAdmin)

@@ -1,6 +1,8 @@
 from django.contrib import messages
 from .models import Player, RecordTime, CheckPoint
 from django.shortcuts import render
+import operator
+from django.db.models import Count, Sum
 
 from .forms import AddTimeForm
 
@@ -25,9 +27,15 @@ def cp(request, cpid, template_name):
         form = AddTimeForm(request.POST)
 
         if form.is_valid():
-            form.save()
-            messages.add_message(request, messages.SUCCESS, 'Record guardado exitosamente.')
+            player = Player.objects.get(pk=form.cleaned_data['player'])
+            previous_record = player.get_last_checkpoint()
+            current_record = form.save()
+            if previous_record:
+                timedelta = current_record.check_in_time-previous_record.check_in_time
+                current_record.duration = current_record.check_in_time-previous_record.check_in_time
+                current_record.save()
 
+            messages.add_message(request, messages.SUCCESS, 'Record guardado exitosamente.')
             form = AddTimeForm()
     else:
         pass
@@ -42,36 +50,45 @@ def cp(request, cpid, template_name):
 
 
 def reports(request, template_name):
-    player = Player.objects.all()
-    print player
+
+    player_total_time = Player.objects.annotate(total_time=Sum('record_time__duration')).order_by('-total_time')
+
+    players = Player.objects.all()
+
+
+    time_table= {}
+    for p in players:
+        try:
+            first_record = RecordTime.objects.filter(player=p).order_by('check_in_time')[0]
+            last_record = RecordTime.objects.filter(player=p).order_by('-check_in_time')[0]
+            time_table[p.mprid]=last_record.check_in_time - first_record.check_in_time
+        except IndexError as e:
+            time_table[p.mprid]=0
+
+    sorted_table = sorted(time_table, key=operator.itemgetter(1))
+
+    final_table=[]
+    for d in sorted_table:
+        final_table.append({'player':id})
+
+    for p in player_total_time:
+        print p.total_time
 
     context = {
-        "player": player
+        "players":players,
+        "time_tables": sorted_table,
+        "player_total_time": player_total_time
+
     }
     return render(request, template_name, context)
 
 
-def playertimedetails(request, mprid, template_name):
-    detail_records = RecordTime.objects.filter(mprid=mprid).order_by('check_in_time')
+def playertimedetails(request, player, template_name):
+    detail_records = RecordTime.objects.filter(player=player).order_by('check_in_time')
 
-    time1 = None
-    i = 0
-    details_table= []
-    for dr in detail_records:
-        if i == 0:
-            time1 = dr.check_in_time
-            details_table.append({'diff': None,
-                                  'check_in_time': dr.check_in_time,
-                                  'place_name': dr.place_name})
-            i += 1
-        else :
-            details_table.append({'diff': dr.check_in_time - time1,
-                                  'check_in_time': dr.check_in_time,
-                                  'place_name': dr.place_name})
-            time1 = dr.check_in_time
-            i += 1
+
     context = {
-        "details": details_table,
-        "mprid": mprid
+        "details": detail_records,
+        "player": player
     }
     return render(request, template_name, context)
