@@ -31,7 +31,6 @@ def cp(request, cpid, template_name):
             previous_record = player.get_last_checkpoint()
             current_record = form.save()
             if previous_record:
-                timedelta = current_record.check_in_time-previous_record.check_in_time
                 current_record.duration = current_record.check_in_time-previous_record.check_in_time
                 current_record.save()
 
@@ -53,30 +52,7 @@ def reports(request, template_name):
 
     player_total_time = Player.objects.annotate(total_time=Sum('record_time__duration')).order_by('-total_time')
 
-    players = Player.objects.all()
-
-
-    time_table= {}
-    for p in players:
-        try:
-            first_record = RecordTime.objects.filter(player=p).order_by('check_in_time')[0]
-            last_record = RecordTime.objects.filter(player=p).order_by('-check_in_time')[0]
-            time_table[p.mprid]=last_record.check_in_time - first_record.check_in_time
-        except IndexError as e:
-            time_table[p.mprid]=0
-
-    sorted_table = sorted(time_table, key=operator.itemgetter(1))
-
-    final_table=[]
-    for d in sorted_table:
-        final_table.append({'player':id})
-
-    for p in player_total_time:
-        print p.total_time
-
     context = {
-        "players":players,
-        "time_tables": sorted_table,
         "player_total_time": player_total_time
 
     }
@@ -85,7 +61,6 @@ def reports(request, template_name):
 
 def playertimedetails(request, player, template_name):
     detail_records = RecordTime.objects.filter(player=player).order_by('check_in_time')
-
 
     context = {
         "details": detail_records,
