@@ -6,7 +6,7 @@ from .forms import AddTimeForm
 
 
 class PlayerAdmin(admin.ModelAdmin):
-    list_display = ['mprid', 'full_name', 'email', 'phone']
+    list_display = ['mprid', 'full_name']
 
 
 class CheckPointAdmin(admin.ModelAdmin):
@@ -15,7 +15,7 @@ class CheckPointAdmin(admin.ModelAdmin):
 
 class RecordTimeAdmin(admin.ModelAdmin):
     form = AddTimeForm
-    list_display = ('player', 'check_in_time', 'check_point','duration')
+    list_display = ('player', 'check_in_time', 'check_point', 'duration')
     list_filter = ['player']
 
 

@@ -4,8 +4,6 @@ from django.db import models
 class Player(models.Model):
     mprid = models.CharField(verbose_name="MPR ID", max_length=3, primary_key=True, editable=True)
     full_name = models.CharField(verbose_name="Nombre Completo", max_length=200)
-    phone = models.CharField(verbose_name="Telefono", max_length=10)
-    email = models.EmailField(verbose_name="Email")
 
     class Meta:
         verbose_name = "Jugador"
