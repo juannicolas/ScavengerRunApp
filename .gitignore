@@ -65,3 +65,5 @@ target/
 # OSX
 .DS_*
 
+.gitignore
+.vscode
