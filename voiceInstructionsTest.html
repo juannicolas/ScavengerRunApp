@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Spoken Instruction Example</title>
+  <style>
+    /* Your CSS styles here */
+  </style>
+</head>
+<body>
+  <!-- Your HTML content here -->
+
+  <script>
+    // Wait for the page to load
+    document.addEventListener('DOMContentLoaded', function(event) {
+      // Create a new speech synthesis object
+      const speechSynthesis = window.speechSynthesis;
+
+      // Create a new speech utterance
+      const utterance = new SpeechSynthesisUtterance();
+
+      // Set the text to be spoken
+      utterance.text = 'Your spoken instruction goes here.';
+
+      // Trigger the speech synthesis
+      speechSynthesis.speak(utterance);
+    });
+  </script>
+Testing
+</body>
+</html>
